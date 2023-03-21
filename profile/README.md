@@ -23,5 +23,5 @@ Have you done it already? Okay, good. Now if you need to contact us, well, you m
 ## If you have liked our work and want to support us please consider donating for servers
 
 ```bash
-PAYPAL: https://www.paypal.me/kevinmp26
+PAYPAL: http://paypal.me/KevinMirandaPasiche
 ```
