@@ -8,11 +8,12 @@
 
 To get started, you gonna have to check the following repositories:
 
-* [**Theme Mods**](https://github.com/Mods-Center/Miui_Theme_Mod)
-* [**Launcher Mods**](https://github.com/Mods-Center/Miui_Launcher_Mod)
 * [**AOD Mods**](https://github.com/Mods-Center/Miui_Always_On_Display_Mod)
 * [**Gallery Mods**](https://github.com/Mods-Center/Miui_Gallery_Mod)
+* [**Launcher Mods**](https://github.com/Mods-Center/Miui_Launcher_Mod)
+* [**Plugin Mods**](https://github.com/Mods-Center/Miui_Plugin_Mod)
 * [**Security Mods**](https://github.com/Mods-Center/MiuiSecurityMod)
+* [**Theme Mods**](https://github.com/Mods-Center/Miui_Theme_Mod)
 
 Now that we mentioned the important repositories for building, if you want you can checkout some repositories to join us, 
 Have you done it already? Okay, good. Now if you need to contact us, well, you may ask in our [Telegram](https://t.me/bootloop_discussion) Support Group, ~~we may or may not answer.~~
