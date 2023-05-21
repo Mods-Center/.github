@@ -1,4 +1,4 @@
-# Welcome to the Mods-Center Project ///////////////
+# Welcome to the Mods-Center Project
 
 ![Source Code](https://telegra.ph/file/5d6102866f37abb10a276.jpg)
 
