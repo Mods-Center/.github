@@ -1,6 +1,6 @@
 # Welcome to the Mods-Center Project
 
-![Source Code](https://telegra.ph/file/5d6102866f37abb10a276.jpg)
+![Source Code](https://github.com/Mods-Center/.github/assets/83476983/24045f75-02d1-419c-8134-0579b0df976e)
 
 ## Basics that you may need to know
 
