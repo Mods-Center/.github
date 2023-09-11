@@ -9,6 +9,7 @@
 To get started, you gonna have to check the following repositories:
 
 * [**AOD Mods**](https://github.com/Mods-Center/Miui_Always_On_Display_Mod)
+* [**AppVault Mods**](https://github.com/Mods-Center/Miui_App_Vault_Mod)
 * [**Gallery Mods**](https://github.com/Mods-Center/Miui_Gallery_Mod)
 * [**Launcher Mods**](https://github.com/Mods-Center/Miui_Launcher_Mod)
 * [**Plugin Mods**](https://github.com/Mods-Center/Miui_Plugin_Mod)
