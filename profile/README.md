@@ -1,29 +1,35 @@
-# Welcome to the Mods-Center Project
-
 ![Source Code](https://github.com/Mods-Center/.github/assets/83476983/24045f75-02d1-419c-8134-0579b0df976e)
+<h1 align="center">Welcome to Mods Center Project</h1>
 
-## Basics that you may need to know
+<div align="center">
+  <strong>Join our community to access the latest modified apps that will empower you to make the most of your HyperOS and MIUI experience. Customize and enjoy to the fullest with our modified applications!</strong>
+  <br/><br/>
+  <a href="https://t.me/kashis_cringey_stuffs"><img src="https://img.shields.io/badge/telegram-channel-blue?style=for-the-badge&logo=telegram&logoColor=white"/></a>
+  <a href="https://t.me/amogus_discussion"><img src="https://img.shields.io/badge/telegram-discuss-blue?style=for-the-badge&logo=telegram&logoColor=white"/></a>
+</div>
 
-### Lets begin the madness !
+<h3 align="center">HyperOS Apps</h3>
+<div align="center">
+  <a href="https://github.com/Mods-Center/HyperOS-Launcher">Launcher</a>
+  <br/>
+  <a href="https://github.com/Mods-Center/HyperOS-Plugin">System UI Plugin</a>
+  <br/>
+  <a href="https://github.com/Mods-Center/HyperOS-Security-Center">Security Center</a>
+  <br/>
+  <a href="https://github.com/Mods-Center/HyperOS-App-Vault">AppVault</a>
+  <br/>
+  <a href="https://github.com/Mods-Center/HyperOS-Theme-Manager">Theme Manager</a>
+  <br/>
+</div>
 
-To get started, you gonna have to check the following repositories:
-
-* [**AOD Mods**](https://github.com/Mods-Center/Miui_Always_On_Display_Mod)
-* [**AppVault Mods**](https://github.com/Mods-Center/Miui_App_Vault_Mod)
-* [**Gallery Mods**](https://github.com/Mods-Center/Miui_Gallery_Mod)
-* [**Launcher Mods**](https://github.com/Mods-Center/Miui_Launcher_Mod)
-* [**Plugin Mods**](https://github.com/Mods-Center/Miui_Plugin_Mod)
-* [**Security Mods**](https://github.com/Mods-Center/MiuiSecurityMod)
-* [**Theme Mods**](https://github.com/Mods-Center/Miui_Theme_Mod)
-
-Now that we mentioned the important repositories for building, if you want you can checkout some repositories to join us, 
-Have you done it already? Okay, good. Now if you need to contact us, well, you may ask in our [Telegram](https://t.me/bootloop_discussion) Support Group, ~~we may or may not answer.~~
-
- * [**Telegram Chat Group**](https://t.me/bootloop_discussion)
- * [**Telegram Announcements Channel**](https://t.me/kashis_cringey_stuffs)
-
-## If you have liked our work and want to support us please consider donating for servers
-
-```bash
-PAYPAL: http://paypal.me/KevinMirandaPasiche
-```
+<h3 align="center">Other</h3>
+<div align="center">
+  <a href="https://github.com/Mods-Center/FPS-Limitation-Patcher">FPS Limitations Patcher</a>
+  <br/>
+  <a href="https://github.com/Mods-Center/Package-Installer">Package Installer</a>
+  <br/>
+  <a href="https://github.com/Mods-Center/Apk-Protection-Patch">Apk Protection Patcher</a>
+  <br/>
+  <a href="https://github.com/Mods-Center/Monet-Picker">Monet Picker</a>
+  <br/>
+</div>
