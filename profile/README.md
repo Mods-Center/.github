@@ -10,13 +10,15 @@
 
 <h3 align="center">HyperOS Apps</h3>
 <div align="center">
+  <a href="https://github.com/Mods-Center/HyperOS-AOD">AOD</a>
+  <br/>
+  <a href="https://github.com/Mods-Center/HyperOS-App-Vault">AppVault</a>
+  <br/>
   <a href="https://github.com/Mods-Center/HyperOS-Launcher">Launcher</a>
   <br/>
   <a href="https://github.com/Mods-Center/HyperOS-Plugin">System UI Plugin</a>
   <br/>
   <a href="https://github.com/Mods-Center/HyperOS-Security-Center">Security Center</a>
-  <br/>
-  <a href="https://github.com/Mods-Center/HyperOS-App-Vault">AppVault</a>
   <br/>
   <a href="https://github.com/Mods-Center/HyperOS-Theme-Manager">Theme Manager</a>
   <br/>
@@ -24,12 +26,12 @@
 
 <h3 align="center">Other</h3>
 <div align="center">
-  <a href="https://github.com/Mods-Center/FPS-Limitation-Patcher">FPS Limitations Patcher</a>
-  <br/>
-  <a href="https://github.com/Mods-Center/Package-Installer">Package Installer</a>
-  <br/>
   <a href="https://github.com/Mods-Center/Apk-Protection-Patch">Apk Protection Patcher</a>
   <br/>
+  <a href="https://github.com/Mods-Center/FPS-Limitation-Patcher">FPS Limitations Patcher</a>
+  <br/>
   <a href="https://github.com/Mods-Center/Monet-Picker">Monet Picker</a>
+  <br/>
+  <a href="https://github.com/Mods-Center/Package-Installer">Package Installer</a>
   <br/>
 </div>
