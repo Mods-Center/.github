@@ -5,7 +5,7 @@
   <strong>Join our community to access the latest modified apps that will empower you to make the most of your HyperOS and MIUI experience. Customize and enjoy to the fullest with our modified applications!</strong>
   <br/><br/>
   <a href="https://t.me/kashis_cringey_stuffs"><img src="https://img.shields.io/badge/telegram-channel-blue?style=for-the-badge&logo=telegram&logoColor=white"/></a>
-  <a href="https://t.me/amogus_discussion"><img src="https://img.shields.io/badge/telegram-discuss-blue?style=for-the-badge&logo=telegram&logoColor=white"/></a>
+  <a href="https://t.me/bootloop_discussion"><img src="https://img.shields.io/badge/telegram-discuss-blue?style=for-the-badge&logo=telegram&logoColor=white"/></a>
 </div>
 
 <h3 align="center">HyperOS Apps</h3>
