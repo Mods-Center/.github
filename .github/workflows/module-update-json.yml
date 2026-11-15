@@ -1,0 +1,85 @@
+# Reusable workflow for Mods Center modules.
+# Reads version/versionCode from the release zip's module.prop and writes
+# update.json + changelog.md to the default branch, so Magisk / KernelSU /
+# KSU-Next / APatch show an "Update" button (module.prop: updateJson=...).
+#
+# Caller (in each module repo, .github/workflows/update-json.yml):
+#   on:
+#     release: { types: [published, edited] }
+#     workflow_dispatch:
+#       inputs: { tag: { description: "Release tag (empty = latest)", required: false } }
+#   permissions: { contents: write }
+#   jobs:
+#     update:
+#       uses: Mods-Center/.github/.github/workflows/module-update-json.yml@main
+#       with: { tag: "${{ inputs.tag }}" }
+name: Module update.json
+
+on:
+  workflow_call:
+    inputs:
+      tag:
+        description: Release tag (empty = triggering release, else latest)
+        required: false
+        type: string
+        default: ""
+
+permissions:
+  contents: write
+
+jobs:
+  update-json:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+
+      - name: Write update.json and changelog.md
+        env:
+          GH_TOKEN: ${{ github.token }}
+          IN_TAG: ${{ inputs.tag || github.event.release.tag_name }}
+          BRANCH: ${{ github.event.repository.default_branch }}
+          UNZIP_DISABLE_ZIPBOMB_DETECTION: "TRUE"
+        run: |
+          set -eu
+          TAG="$IN_TAG"
+          [ -n "$TAG" ] || TAG=$(gh release view --json tagName --jq .tagName)
+          echo "Release: $TAG"
+
+          # module zip: first .zip asset, else the first asset
+          asset=$(gh release view "$TAG" --json assets --jq '([.assets[] | select(.name | test("(?i)\\.zip$"))] + .assets)[0].name')
+          [ -n "$asset" ] && [ "$asset" != "null" ] || { echo "::error::release $TAG has no assets"; exit 1; }
+          rm -rf "$RUNNER_TEMP/rel"; mkdir -p "$RUNNER_TEMP/rel"
+          gh release download "$TAG" -p "$asset" -D "$RUNNER_TEMP/rel"
+          zip="$RUNNER_TEMP/rel/$asset"
+
+          # DynamicInstaller modules install META-INF/com/google/android/magisk/module.prop
+          prop=$(unzip -p "$zip" META-INF/com/google/android/magisk/module.prop 2>/dev/null || true)
+          [ -n "$prop" ] || prop=$(unzip -p "$zip" module.prop 2>/dev/null || true)
+          [ -n "$prop" ] || { echo "::error::no module.prop in $asset"; exit 1; }
+          getp() { printf '%s\n' "$prop" | tr -d '\r' | sed -n "s/^$1=//p" | head -n1; }
+          ver=$(getp version); code=$(getp versionCode)
+          case "$code" in ''|*[!0-9]*) echo "::error::versionCode '$code' is not a number"; exit 1;; esac
+          getp updateJson | grep -q . || echo "::warning::module.prop in $asset has no updateJson= line"
+          echo "version=$ver versionCode=$code asset=$asset"
+
+          url="https://github.com/$GITHUB_REPOSITORY/releases/download/$(jq -rn --arg s "$TAG" '$s|@uri')/$(jq -rn --arg s "$asset" '$s|@uri')"
+          jq -n --arg v "$ver" --argjson c "$code" --arg z "$url" \
+                --arg cl "https://raw.githubusercontent.com/$GITHUB_REPOSITORY/$BRANCH/changelog.md" \
+                '{version:$v, versionCode:$c, zipUrl:$z, changelog:$cl}' > update.json
+
+          head="## $ver ($code)"
+          if ! grep -qxF "$head" changelog.md 2>/dev/null; then
+            body=$(gh release view "$TAG" --json body --jq .body | tr -d '\r')
+            { printf '%s\n\n%s\n\n' "$head" "${body:-Bug fixes and improvements.}"
+              [ -f changelog.md ] && cat changelog.md; } > "$RUNNER_TEMP/cl.md"
+            mv "$RUNNER_TEMP/cl.md" changelog.md
+          fi
+
+          git add update.json changelog.md
+          if git diff --cached --quiet; then echo "No changes"; exit 0; fi
+          git -c user.name="github-actions[bot]" \
+              -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+              commit -q -m "update.json: $ver ($code)"
+          git push -q
