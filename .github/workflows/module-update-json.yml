@@ -30,6 +30,10 @@ permissions:
 jobs:
   update-json:
     runs-on: ubuntu-latest
+    # one run at a time per repo (publish + edit fire together and raced on git push)
+    concurrency:
+      group: update-json-${{ github.repository }}
+      cancel-in-progress: false
     steps:
       - uses: actions/checkout@v4
         with:
@@ -47,11 +51,21 @@ jobs:
           [ -n "$TAG" ] || TAG=$(gh release view --json tagName --jq .tagName)
           echo "Release: $TAG"
 
-          # module zip: first .zip asset, else the first asset
-          asset=$(gh release view "$TAG" --json assets --jq '([.assets[] | select(.name | test("(?i)\\.zip$"))] + .assets)[0].name')
-          [ -n "$asset" ] && [ "$asset" != "null" ] || { echo "::error::release $TAG has no assets"; exit 1; }
+          # module zip: first .zip asset, else the first asset. Right after a release is published or
+          # its zip re-uploaded, GitHub can still report no (finished) assets for a while: wait for it.
+          asset=""
+          for i in $(seq 1 30); do
+            asset=$(gh release view "$TAG" --json assets --jq '([.assets[] | select(.name | test("(?i)\\.zip$"))] + .assets)[0].name' 2>/dev/null || true)
+            [ -n "$asset" ] && [ "$asset" != "null" ] && break
+            asset=""; echo "waiting for the release asset ($i/30)..."; sleep 10
+          done
+          [ -n "$asset" ] || { echo "::error::release $TAG has no assets"; exit 1; }
           rm -rf "$RUNNER_TEMP/rel"; mkdir -p "$RUNNER_TEMP/rel"
-          gh release download "$TAG" -p "$asset" -D "$RUNNER_TEMP/rel"
+          for i in 1 2 3 4 5; do
+            gh release download "$TAG" -p "$asset" -D "$RUNNER_TEMP/rel" --clobber && break
+            [ "$i" = 5 ] && { echo "::error::could not download $asset"; exit 1; }
+            sleep 15
+          done
           zip="$RUNNER_TEMP/rel/$asset"
 
           # DynamicInstaller modules install META-INF/com/google/android/magisk/module.prop
@@ -82,4 +96,8 @@ jobs:
           git -c user.name="github-actions[bot]" \
               -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
               commit -q -m "update.json: $ver ($code)"
-          git push -q
+          for i in 1 2 3 4 5; do
+            git push -q && break
+            [ "$i" = 5 ] && { echo "::error::git push failed"; exit 1; }
+            sleep 5; git pull -q --rebase
+          done
